@@ -1,0 +1,19 @@
+{
+    "name": "arikaim/qrcode-module",
+    "description": "Arikam QR code Module",
+    "keywords": ["qrcode", "Arikaim QR code module"],
+    "type": "arikaim-module",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Konstantin Atanasov",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {
+        "arikaim/installer": "*" ,
+        "chillerlan/php-qrcode": "^3.4.0"
+    },
+    "extra": {       
+        "path": "qrcode"
+    }
+}
