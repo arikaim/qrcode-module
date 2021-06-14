@@ -5,11 +5,14 @@
     "type": "package",
     "class": "QrCode",
     "description": "QR code generator.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "repository": "https://github.com/arikaim/qrcode-module.git",
     "require": {
         "composer": [
             "chillerlan/php-qrcode"
+        ],
+        "modules": [
+            "image"
         ]
     }, 
     "disabled": false
