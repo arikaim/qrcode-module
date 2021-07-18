@@ -11,9 +11,11 @@ namespace Arikaim\Modules\Qrcode\Service;
 
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
+use Zxing\QrReader;
 
 use Arikaim\Core\Service\Service;
 use Arikaim\Core\Service\ServiceInterface;
+
 
 /**
  * QrCode service class
@@ -28,6 +30,19 @@ class QrCodeService extends Service implements ServiceInterface
         $this->setServiceName('qrcode');
     }
 
+    /**
+     * Decode qr code image
+     *
+     * @param string $imagePaht
+     * @return mixed
+     */
+    public function decode(string $imagePaht)
+    {
+        $qrcode = new QrReader($imagePaht);
+        
+        return $qrcode->text();
+    }
+   
     /**
      * Render qrcode
      *
