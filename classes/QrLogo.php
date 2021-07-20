@@ -15,7 +15,7 @@ use Exception;
 /**
  * Qr code image with logo
  */
-class QRImageWithLogo extends QRImage
+class QrLogo extends QRImage
 {
 	/**
      * Dump image
