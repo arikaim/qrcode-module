@@ -21,14 +21,21 @@ class LogoOptions extends QROptions
      *
      * @var int
      */
-    protected $logoSpaceWidth;
+    public $logoSpaceWidth;
 	
     /**
      * Space width
      *
      * @var int
      */
-    protected $logoSpaceHeight;
+    public $logoSpaceHeight;
+
+    /**
+     * Background color
+     *
+     * @var mixed
+     */
+    public $bgColor = null;
 
     /**
      * Constructor
@@ -46,6 +53,7 @@ class LogoOptions extends QROptions
             $this->logoSpaceHeight  = $options['space_height'] ?? 10;
             $this->scale            = $options['scale'] ?? 5;
             $this->imageTransparent = $options['transparent'] ?? false;
+            $this->bgColor = $options['bgColor'] ?? null;
         }
     } 
 }
