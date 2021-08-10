@@ -77,8 +77,8 @@ class QrLogo extends QRImage
 		$height = \imagesy($logoImage);
 		$leftWidth = ($this->options->logoSpaceWidth - 2) * $this->options->scale;
 		$leftHeigth = ($this->options->logoSpaceHeight - 2) * $this->options->scale;
-        $spaceX = 7;
-        $spaceY = 7;
+        $spaceX = 0;
+        $spaceY = 0;
 
 		$size = $this->matrix->size() * $this->options->scale;
         $destinationX = (($size - $leftWidth) / 2) + $spaceX;
