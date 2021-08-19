@@ -55,5 +55,7 @@ class LogoOptions extends QROptions
             $this->imageTransparent = $options['transparent'] ?? false;
             $this->bgColor = $options['bgColor'] ?? null;
         }
+
+        parent::__construct($options);
     } 
 }
