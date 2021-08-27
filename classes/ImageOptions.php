@@ -8,13 +8,14 @@
  * 
 */
 namespace Arikaim\Modules\Qrcode\Classes;
+
 use chillerlan\QRCode\QROptions;
 use chillerlan\QRCode\QRCode;
 
 /**
  * Qr code logo image options
  */
-class LogoOptions extends QROptions
+class ImageOptions extends QROptions
 {
     /**
      * space height
@@ -38,15 +39,28 @@ class LogoOptions extends QROptions
     public $bgColor = null;
 
     /**
+     * Logo file name
+     *
+     * @var string|null
+     */
+    public $logoFileName = null;
+
+    /**
+     * Frame options
+     *
+     * @var array|null
+     */
+    public $frame = null;
+
+    /**
      * Constructor
      *
      * @param array|null $options
      */
     public function __construct(?array $options = null)
     {
-        $this->eccLevel = QRCode::ECC_H;
-
         if (\is_array($options) == true) {
+            $this->eccLevel = $options['eccLevel'] ?? QRCode::ECC_H;
             $this->version = $options['version'] ?? 7;            
             $this->imageBase64 = $options['imageBase64'];
             $this->logoSpaceWidth   = $options['space_width'] ?? 10;
@@ -54,6 +68,8 @@ class LogoOptions extends QROptions
             $this->scale            = $options['scale'] ?? 5;
             $this->imageTransparent = $options['transparent'] ?? false;
             $this->bgColor = $options['bgColor'] ?? null;
+            $this->logoFileName = $options['logoFileName'] ?? null;
+            $this->frame = $options['frame'] ?? null;
         }
 
         parent::__construct($options);

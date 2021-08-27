@@ -15,7 +15,7 @@ use Zxing\QrReader;
 
 use Arikaim\Core\Service\Service;
 use Arikaim\Core\Service\ServiceInterface;
-
+use Arikaim\Modules\Qrcode\Classes\QrCodeFrame;
 
 /**
  * QrCode service class
@@ -52,7 +52,7 @@ class QrCodeService extends Service implements ServiceInterface
      */
     public function render(string $data, ?array $config = null)
     {        
-        $qrcode = $this->create($data,$config);
+        $qrcode = $this->create($config);
 
         return (\is_object($qrcode) == true) ? $qrcode->render($data) : null;
     }
@@ -67,7 +67,7 @@ class QrCodeService extends Service implements ServiceInterface
      */
     public function saveToFile(string $data, string $fileName, ?array $config = null): bool
     {
-        $qrcode = $this->create($data,$config);
+        $qrcode = $this->create($config);
         if (\is_object($qrcode) == false) {
             return false;
         }
@@ -86,7 +86,7 @@ class QrCodeService extends Service implements ServiceInterface
      */
     public function getMatrix(string $data, ?array $config = null)
     {
-        $qrcode = $this->create($data,$config);
+        $qrcode = $this->create($config);
 
         return (\is_object($qrcode) == true) ? $qrcode->getMatrix($data) : null; 
     }
@@ -94,20 +94,31 @@ class QrCodeService extends Service implements ServiceInterface
     /**
      * Create qrcode
      *
-     * @param string $data
      * @param array|null $config
      * @return mixed
     */
-    public function create(string $data, ?array $config = null)
-    {
-        $config = $config ?? [
+    public function create(?array $config = null)
+    {       
+        $options = new QROptions($config ?? [
             'version'    => 5,
             'outputType' => QRCode::OUTPUT_MARKUP_SVG,
             'eccLevel'   => QRCode::ECC_L,
-        ];
-        $options = new QROptions($config);
-        $qrcode = new QRCode($options);
-
-        return $qrcode;
+        ]);
+     
+        return new QRCode($options);
     } 
+
+    /**
+     * Render frame icon
+     *
+     * @param string $name
+     * @param integer $width
+     * @param integer $height
+     * @param string $encodeType
+     * @return void
+     */
+    public function renderFrameIcon(string $name, int $width = 64, int $height = 64, string $encodeType = 'data-url')
+    {
+        return QrCodeFrame::renderIcon($name,$width,$height,$encodeType);
+    }
 }

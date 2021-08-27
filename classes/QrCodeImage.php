@@ -10,26 +10,27 @@
 namespace Arikaim\Modules\Qrcode\Classes;
 
 use chillerlan\QRCode\Output\QRImage;
+
 use Arikaim\Modules\Image\Classes\Color;
+use Arikaim\Modules\Qrcode\Classes\QrCodeFrame;
 
 /**
- * Qr code image with logo
+ * Qr code image with optional logo and frame
  */
-class QrLogo extends QRImage
+class QrCodeImage extends QRImage
 {
 	/**
      * Dump image
      * 
 	 * @param string|null $file
-	 * @param string|null $logo
-	 *
+     * 
 	 * @return string|null	
 	 */
-	public function dump(?string $file = null, ?string $logo = null): ?string
+	public function dump(?string $file = null): ?string
     {		
 		$this->options->returnResource = true;
         // add logo
-        if (empty($logo) == false) {
+        if (empty($this->options->logoFileName) == false) {
             $this->matrix->setLogoSpace(
                 $this->options->logoSpaceWidth,
                 $this->options->logoSpaceHeight			
@@ -45,10 +46,15 @@ class QrLogo extends QRImage
         }
 
         // add logo
-        if (empty($logo) == false) {
-            $this->addLogoImage($logo);
+        if (empty($this->options->logoFileName) == false) {
+            $this->addLogoImage($this->options->logoFileName);
         }
-       
+        
+        if (\is_array($this->options->frame) == true) {
+            $frame = new QrCodeFrame($this->image,$this->options->frame);
+            $this->image = $frame->render();
+        }
+      
 		$imageData = $this->dumpImage();
 
 		if ($file !== null) {
@@ -65,12 +71,12 @@ class QrLogo extends QRImage
     /**
      * Add logo image
      *
-     * @param string|null $logo
+     * @param string $fileName
      * @return void
      */
-    protected function addLogoImage(?string $logo): void
+    protected function addLogoImage(string $fileName): void
     {       
-		$logoImage = \imagecreatefrompng($logo);
+		$logoImage = \imagecreatefrompng($fileName);
 
 		// get logo image size
 		$width = \imagesx($logoImage);
