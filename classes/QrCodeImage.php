@@ -51,6 +51,7 @@ class QrCodeImage extends QRImage
         }
         
         if (\is_array($this->options->frame) == true) {
+            $this->options->frame['scale'] = $this->options->scale;
             $frame = new QrCodeFrame($this->image,$this->options->frame);
             $this->image = $frame->render();
         }

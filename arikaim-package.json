@@ -5,7 +5,7 @@
     "type": "package",
     "class": "QrCode",
     "description": "QR code generator.",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "repository": "https://github.com/arikaim/qrcode-module.git",
     "require": {
         "composer": [
