@@ -53,6 +53,13 @@ class ImageOptions extends QROptions
     public $frame = null;
 
     /**
+     * Gd image font path
+     *
+     * @var string|null
+     */
+    public $fontPath = null;
+
+    /**
      * Constructor
      *
      * @param array|null $options
@@ -70,6 +77,7 @@ class ImageOptions extends QROptions
             $this->bgColor = $options['bgColor'] ?? null;
             $this->logoFileName = $options['logoFileName'] ?? null;
             $this->frame = $options['frame'] ?? null;
+            $this->fontPath = $options['fontPath'] ?? null;
         }
 
         parent::__construct($options);
