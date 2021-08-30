@@ -35,7 +35,7 @@ class SimpleBorderInvertedFrame implements FrameInterface
         if (empty($options['label']) == false) {
             $canvas->text($options['label'],($width / 2),8,function($font) use($options) {
                 $font->file($options['fontFile']);
-                $font->size(42);
+                $font->size($options['fontSize']);
                 $font->align('center');
                 $font->valign('top');
                 $font->color($options['text_color']);

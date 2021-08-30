@@ -35,7 +35,7 @@ class SimpleBorderFrame implements FrameInterface
         if (empty($options['label']) == false) {
             $canvas->text($options['label'],($width / 2),($height - 6),function($font) use($options) {
                 $font->file($options['fontFile']);
-                $font->size(42);
+                $font->size($options['fontSize']);
                 $font->align('center');
                 $font->valign('bottom');
                 $font->color($options['text_color']);
@@ -56,7 +56,7 @@ class SimpleBorderFrame implements FrameInterface
     public function renderIcon(int $width, int $height, string $econdeType = 'data-url') 
     {
         $canvas = Arikaim::getService('image')->manager()->canvas($width,$height,'#000');
-        $canvas->rectangle(2, 2, ($width - 2), ($height - 20), function ($draw) {
+        $canvas->rectangle(2,2,($width - 2), ($height - 20), function ($draw) {
             $draw->background('#fff');           
         });
         $canvas->text('SCAN ME',($width / 2),($height - 6),function($font) {

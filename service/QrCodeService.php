@@ -16,6 +16,7 @@ use Zxing\QrReader;
 use Arikaim\Core\Service\Service;
 use Arikaim\Core\Service\ServiceInterface;
 use Arikaim\Modules\Qrcode\Classes\QrCodeFrame;
+use Arikaim\Core\Arikaim;
 
 /**
  * QrCode service class
@@ -107,6 +108,27 @@ class QrCodeService extends Service implements ServiceInterface
      
         return new QRCode($options);
     } 
+
+    /**
+     * Create empty qr code image (placeholder)
+     *
+     * @param integer $scale
+     * @param float $opacity
+     * @param string $encodeType
+     * @return mixed
+     */
+    public function renderEmpty(int $scale = 5, float $opacity = 0.3, string $encodeType = 'data-url')
+    {     
+        $resource = $this->render('...',[
+            'scale'            => $scale,
+            'imageTransparent' => true,
+            'outputType'       => 'png',
+            'returnResource'   => true
+        ]);
+        $image = Arikaim::getService('image')->opacity($resource,$opacity);
+    
+        return Arikaim::getService('image')->make($image)->encode($encodeType);     
+    }
 
     /**
      * Render frame icon

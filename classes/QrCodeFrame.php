@@ -97,9 +97,13 @@ class QrCodeFrame
      */
     protected function resolveOptions(array $options): array
     {
+        $options['scale'] = empty($options['scale'] ?? null) ? 5 : $options['scale']; 
         $options['font'] = empty($options['font'] ?? null) ? 'ostrich-sans-black.ttf' : $options['font']; 
         $options['fontPath'] = empty($options['fontPath'] ?? null) ? Path::STORAGE_PATH . 'fonts' . DIRECTORY_SEPARATOR : $options['fontPath']; 
         $options['fontFile'] = $options['fontPath'] . $options['font'];
+        $options['fontSize'] = 8 * $options['scale'];
+        $options['fontSize'] = ($options['fontSize'] > 42) ? 42 : $options['fontSize'];
+
         $options['label'] = $options['label'] ?? 'SCAN ME';
         $options['color'] = empty($options['color'] ?? null) ? '#000' : $options['color'];
         $options['text_color'] = empty($options['text_color'] ?? null) ? '#fff' : $options['text_color'];
