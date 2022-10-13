@@ -11,7 +11,7 @@
     }],
     "require": {
         "arikaim/installer": "*" ,
-        "chillerlan/php-qrcode": "^3.4.0",
+        "chillerlan/php-qrcode": "^4.3.4",
         "khanamiryan/qrcode-detector-decoder": "^1.0.0"
     },
     "extra": {       

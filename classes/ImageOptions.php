@@ -60,6 +60,27 @@ class ImageOptions extends QROptions
     public $fontPath = null;
 
     /**
+     * Draw circle pixels
+     *
+     * @var boolean
+     */
+    public $drawCircularModules = false;
+
+    /**
+     * Keep square modules
+     *
+     * @var array
+     */
+    public $keepAsSquare = [];
+
+    /**
+     *  Pixel circle radius
+     *
+     * @var int
+     */
+    public $circleRadius;
+
+    /**
      * Constructor
      *
      * @param array|null $options
@@ -77,7 +98,10 @@ class ImageOptions extends QROptions
             $this->bgColor = $options['bgColor'] ?? null;
             $this->logoFileName = $options['logoFileName'] ?? null;
             $this->frame = $options['frame'] ?? null;
+            $this->drawCircularModules = $options['drawCircularModules'] ?? false;
+            $this->keepAsSquare = $options['keepAsSquare'] ?? [];
             $this->fontPath = $options['fontPath'] ?? null;
+            $this->circleRadius = $options['circleRadius'] ?? 1;
         }
 
         parent::__construct($options);
