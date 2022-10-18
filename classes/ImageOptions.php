@@ -90,7 +90,7 @@ class ImageOptions extends QROptions
         if (\is_array($options) == true) {
             $this->eccLevel = $options['eccLevel'] ?? QRCode::ECC_H;
             $this->version = $options['version'] ?? 7;            
-            $this->imageBase64 = $options['imageBase64'];
+            $this->imageBase64 = $options['imageBase64'] ?? true;
             $this->logoSpaceWidth   = $options['space_width'] ?? 10;
             $this->logoSpaceHeight  = $options['space_height'] ?? 10;
             $this->scale            = $options['scale'] ?? 5;

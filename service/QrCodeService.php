@@ -16,7 +16,6 @@ use Zxing\QrReader;
 use Arikaim\Core\Service\Service;
 use Arikaim\Core\Service\ServiceInterface;
 use Arikaim\Modules\Qrcode\Classes\QrCodeFrame;
-use Arikaim\Core\Arikaim;
 
 /**
  * QrCode service class
@@ -53,9 +52,7 @@ class QrCodeService extends Service implements ServiceInterface
      */
     public function render(string $data, ?array $config = null)
     {        
-        $qrcode = $this->create($config);
-
-        return (\is_object($qrcode) == true) ? $qrcode->render($data) : null;
+        return $this->create($config)->render($data);
     }
 
     /**
@@ -69,10 +66,6 @@ class QrCodeService extends Service implements ServiceInterface
     public function saveToFile(string $data, string $fileName, ?array $config = null): bool
     {
         $qrcode = $this->create($config);
-        if (\is_object($qrcode) == false) {
-            return false;
-        }
-
         $qrcode->render($data,$fileName);
 
         return (bool)\file_exists($fileName);
@@ -87,18 +80,16 @@ class QrCodeService extends Service implements ServiceInterface
      */
     public function getMatrix(string $data, ?array $config = null)
     {
-        $qrcode = $this->create($config);
-
-        return (\is_object($qrcode) == true) ? $qrcode->getMatrix($data) : null; 
+        return $this->create($config)->getMatrix($data);
     }
 
     /**
      * Create qrcode
      *
      * @param array|null $config
-     * @return mixed
+     * @return object
     */
-    public function create(?array $config = null)
+    public function create(?array $config = null): object
     {       
         $options = new QROptions($config ?? [
             'version'    => 5,
@@ -119,15 +110,18 @@ class QrCodeService extends Service implements ServiceInterface
      */
     public function renderEmpty(int $scale = 5, float $opacity = 0.3, string $encodeType = 'data-url')
     {     
+        global $container;
+
         $resource = $this->render('...',[
             'scale'            => $scale,
             'imageTransparent' => true,
             'outputType'       => 'png',
             'returnResource'   => true
         ]);
-        $image = Arikaim::getService('image')->opacity($resource,$opacity);
+
+        $image = $container->get('service')->get('image')->opacity($resource,$opacity);
     
-        return Arikaim::getService('image')->make($image)->encode($encodeType);     
+        return $container->get('service')->get('image')->make($image)->encode($encodeType);     
     }
 
     /**
@@ -137,7 +131,7 @@ class QrCodeService extends Service implements ServiceInterface
      * @param integer $width
      * @param integer $height
      * @param string $encodeType
-     * @return void
+     * @return mixed
      */
     public function renderFrameIcon(string $name, int $width = 64, int $height = 64, string $encodeType = 'data-url')
     {
