@@ -83,15 +83,15 @@ class QrCodeImage extends QRImage
 		// get logo image size
 		$width = \imagesx($logoImage);
 		$height = \imagesy($logoImage);
-		$leftWidth = ($this->options->logoSpaceWidth - 2) * $this->options->scale;
-		$leftHeigth = ($this->options->logoSpaceHeight - 2) * $this->options->scale;
-        $spaceX = 0;
-        $spaceY = 0;
+		$leftWidth = (int)(($this->options->logoSpaceWidth - 2) * $this->options->scale);
+		$leftHeigth = (int)(($this->options->logoSpaceHeight - 2) * $this->options->scale);
+        $spaceX = 8;
+        $spaceY = 8;
 
 		$size = $this->matrix->size() * $this->options->scale;
-        $destinationX = (($size - $leftWidth) / 2) + $spaceX;
-        $destinationY = (($size - $leftHeigth) / 2) + $spaceY;
+        $destinationX = (int)((($size - $leftWidth) / 2) + $spaceX);
+        $destinationY = (int)((($size - $leftHeigth) / 2) + $spaceY);
 
-		\imagecopyresampled($this->image,$logoImage,$destinationX,$destinationY,0,0,$leftWidth,$leftHeigth,$width,$height);                        
+		\imagecopyresampled($this->image,$logoImage,$destinationX,$destinationY,0,0,$leftWidth,$leftHeigth,$width,$height);                           
     }
 }

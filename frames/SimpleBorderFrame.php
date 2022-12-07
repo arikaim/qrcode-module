@@ -26,14 +26,14 @@ class SimpleBorderFrame implements FrameInterface
      */
     public function render($image, array $options)
     {              
-        $width = $image->width() + ($options['borderWidth'] * 2);
-		$height = $image->height() + ($options['borderWidth'] * 2) + 40;
+        $width = $image->width() + (int)($options['borderWidth'] * 2);
+		$height = $image->height() + (int)($options['borderWidth'] * 2) + 40;
 
         $canvas = Arikaim::getService('image')->manager()->canvas($width,$height,$options['color']);
         $canvas->insert($image,'top-left',$options['borderWidth'],$options['borderWidth']);
 
         if (empty($options['label']) == false) {
-            $canvas->text($options['label'],($width / 2),($height - 6),function($font) use($options) {
+            $canvas->text($options['label'],(int)($width / 2),(int)($height - 6),function($font) use($options) {
                 $font->file($options['fontFile']);
                 $font->size($options['fontSize']);
                 $font->align('center');
