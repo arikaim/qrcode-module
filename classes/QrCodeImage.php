@@ -76,7 +76,7 @@ class QrCodeImage extends QRImage
      * @param string $fileName
      * @return void
      */
-    protected function addLogoImage(string $fileName): void
+    protected function addLogoImage(string $fileName, ?int $spaceX = null, ?int $spaceY = null): void
     {       
 		$logoImage = \imagecreatefrompng($fileName);
 
@@ -85,8 +85,8 @@ class QrCodeImage extends QRImage
 		$height = \imagesy($logoImage);
 		$leftWidth = (int)(($this->options->logoSpaceWidth - 2) * $this->options->scale);
 		$leftHeigth = (int)(($this->options->logoSpaceHeight - 2) * $this->options->scale);
-        $spaceX = 8;
-        $spaceY = 8;
+        $spaceX = $spaceX ?? 0;
+        $spaceY = $spaceY ?? 0;
 
 		$size = $this->matrix->size() * $this->options->scale;
         $destinationX = (int)((($size - $leftWidth) / 2) + $spaceX);
