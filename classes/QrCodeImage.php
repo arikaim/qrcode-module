@@ -31,10 +31,12 @@ class QrCodeImage extends QRImage
 		$this->options->returnResource = true;
         // add logo
         if (empty($this->options->logoFileName) == false) {
-            $this->matrix->setLogoSpace(
-                $this->options->logoSpaceWidth,
-                $this->options->logoSpaceHeight			
-            );
+            if ($this->isValidLogoSpace() == false) {
+                $this->options->logoSpaceWidth = 2;
+                $this->options->logoSpaceHeight = 2;
+            }  
+           
+            $this->matrix->setLogoSpace($this->options->logoSpaceWidth,$this->options->logoSpaceHeight);
         }
 
         parent::dump($file);
@@ -69,6 +71,19 @@ class QrCodeImage extends QRImage
 
 		return $imageData;
 	}
+
+    /**
+     * Retrun true if logo space is valid
+     *
+     * @return boolean
+     */
+    protected function isValidLogoSpace(): bool
+    {
+        $length = $this->options->version * 4 + 17;
+        $size = $this->options->logoSpaceWidth * $this->options->logoSpaceHeight;
+
+		return ($size > floor($length * $length * 0.2)) ? false : true;		
+    }
 
     /**
      * Add logo image
