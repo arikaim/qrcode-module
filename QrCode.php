@@ -27,6 +27,19 @@ class QrCode extends Module
     ];
 
     /**
+     *  Default output handler class
+     */
+    const DEFAULT_OUTPUT_HANDLER = \Arikaim\Modules\Qrcode\Classes\QrCodeImage::class;
+
+    /**
+     * Qrcode output hanlders
+     */
+    const OUTPUT_HANDLERS = [
+        'image' => \Arikaim\Modules\Qrcode\Classes\QrCodeImage::class,
+        'svg'   => \Arikaim\Modules\Qrcode\Classes\QrCodeSvg::class,
+    ];
+
+    /**
      * Install module
      *
      * @return void
@@ -34,6 +47,21 @@ class QrCode extends Module
     public function install()
     {
         $this->registerService('QrCodeService');
+    }
+
+    /**
+     * Create qrcode hanlder
+     *
+     * @param string|null $name
+     * @param mixed      $options
+     * @param mixed      $matrix
+     * @return object
+     */
+    public static function createOutputHandler(?string $name, $options, $matrix): object
+    {
+        $class = Self::OUTPUT_HANDLERS[$name ?? 'image'] ?? Self::DEFAULT_OUTPUT_HANDLER;
+
+        return new $class($options,$matrix);
     }
 
     /**
@@ -46,6 +74,6 @@ class QrCode extends Module
     {
         $index = (\is_numeric($key) == true) ? $key : Self::ECC_INDEX[$key] ?? null;
         
-        return \chillerlan\QRCode\QRCode::ECC_MODES[$index] ?? null; 
+        return $index;
     }
 }

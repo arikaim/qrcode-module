@@ -20,16 +20,16 @@ class ImageOptions extends QROptions
     /**
      * space height
      *
-     * @var int
+     * @var int|null
      */
-    public $logoSpaceWidth;
+    public ?int $logoSpaceWidth;
 	
     /**
      * Space width
      *
-     * @var int
+     * @var int|null
      */
-    public $logoSpaceHeight;
+    public ?int $logoSpaceHeight;
 
     /**
      * Background color
@@ -64,21 +64,21 @@ class ImageOptions extends QROptions
      *
      * @var boolean
      */
-    public $drawCircularModules = false;
+    public bool $drawCircularModules = false;
 
     /**
      * Keep square modules
      *
      * @var array
      */
-    public $keepAsSquare = [];
+    public array $keepAsSquare = [];
 
     /**
      *  Pixel circle radius
      *
-     * @var int
+     * @var float
      */
-    public $circleRadius;
+    public float $circleRadius;
 
     /**
      * Constructor
@@ -101,7 +101,7 @@ class ImageOptions extends QROptions
             $this->drawCircularModules = $options['drawCircularModules'] ?? false;
             $this->keepAsSquare = $options['keepAsSquare'] ?? [];
             $this->fontPath = $options['fontPath'] ?? null;
-            $this->circleRadius = $options['circleRadius'] ?? 1;
+            $this->circleRadius = $options['circleRadius'] ?? 0.5;
         }
 
         parent::__construct($options);
