@@ -23,9 +23,11 @@ use Arikaim\Modules\Qrcode\Classes\QrCodeFrame;
 class QrCodeService extends Service implements ServiceInterface
 {
     /**
-     * Constructor
+     * Boot service
+     *
+     * @return void
      */
-    public function __construct()
+    public function boot()
     {
         $this->setServiceName('qrcode');
     }

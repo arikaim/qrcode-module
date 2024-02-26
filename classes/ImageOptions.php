@@ -11,6 +11,7 @@ namespace Arikaim\Modules\Qrcode\Classes;
 
 use chillerlan\QRCode\QROptions;
 use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\Data\QRMatrix;
 
 /**
  * Qr code logo image options
@@ -89,19 +90,25 @@ class ImageOptions extends QROptions
     {
         if (\is_array($options) == true) {
             $this->eccLevel = $options['eccLevel'] ?? QRCode::ECC_H;
-            $this->version = $options['version'] ?? 7;            
+            $this->version = $options['version'] ?? 7;  
+            $this->quality = $options['quality'] ?? 90;                         
             $this->imageBase64 = $options['imageBase64'] ?? true;
             $this->logoSpaceWidth   = $options['space_width'] ?? 10;
             $this->logoSpaceHeight  = $options['space_height'] ?? 10;
-            $this->scale            = $options['scale'] ?? 5;
+            $this->scale            = $options['scale'] ?? 10;
             $this->imageTransparent = $options['transparent'] ?? false;
             $this->bgColor = $options['bgColor'] ?? null;
             $this->logoFileName = $options['logoFileName'] ?? null;
             $this->frame = $options['frame'] ?? null;
-            $this->drawCircularModules = $options['drawCircularModules'] ?? false;
-            $this->keepAsSquare = $options['keepAsSquare'] ?? [];
+            $this->drawCircularModules = $options['drawCircularModules'] ?? true;
+            $this->drawLightModules = $options['drawLightModules'] ?? true;    
+            $this->keepAsSquare = $options['keepAsSquare'] ?? [
+                QRMatrix::M_FINDER_DARK,
+                QRMatrix::M_FINDER_DOT,
+                QRMatrix::M_ALIGNMENT_DARK,
+            ];
             $this->fontPath = $options['fontPath'] ?? null;
-            $this->circleRadius = $options['circleRadius'] ?? 0.5;
+            $this->circleRadius = $options['circleRadius'] ?? 0.4;
         }
 
         parent::__construct($options);
