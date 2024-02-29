@@ -24,9 +24,9 @@ class QrCodeImage extends QRImage
      * 
 	 * @param string|null $file
      * 
-	 * @return string|null	
+	 * @return string	
 	 */
-	public function dump(?string $file = null): ?string
+	public function dump(string $file = null):string
     {		
 		$this->options->returnResource = true;
         // add logo
@@ -71,6 +71,8 @@ class QrCodeImage extends QRImage
 
 		return $imageData;
 	}
+
+  
 
     /**
      * Retrun true if logo space is valid

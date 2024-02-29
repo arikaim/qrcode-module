@@ -12,6 +12,9 @@ namespace Arikaim\Modules\Qrcode\Classes;
 use chillerlan\QRCode\QROptions;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\Data\QRMatrix;
+use chillerlan\QRCode\Output\QROutputInterface;
+
+use Arikaim\Modules\Qrcode\QrCode as QrCodeMudule;
 
 /**
  * Qr code logo image options
@@ -89,6 +92,8 @@ class ImageOptions extends QROptions
     public function __construct(?array $options = null)
     {
         if (\is_array($options) == true) {
+            $this->outputType = QROutputInterface::CUSTOM;
+            $this->outputInterface = QrCodeMudule::getOutputHandlerClass($options['handler'] ?? null);
             $this->eccLevel = $options['eccLevel'] ?? QRCode::ECC_H;
             $this->version = $options['version'] ?? 7;  
             $this->quality = $options['quality'] ?? 90;                         

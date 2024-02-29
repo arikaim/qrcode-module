@@ -77,28 +77,32 @@ class QrCodeService extends Service implements ServiceInterface
      * Get matrix
      *
      * @param string $data
-     * @param array|null $config
+     * @param mixed $config
      * @return mixed
      */
-    public function getMatrix(string $data, ?array $config = null)
+    public function getMatrix(string $data, $config = null)
     {
-        return $this->create($config)->getMatrix($data);
+        return $this->create($config)->getQRMatrix();
     }
 
     /**
      * Create qrcode
      *
-     * @param array|null $config
+     * @param mixed $config
      * @return object
     */
-    public function create(?array $config = null): object
+    public function create($config = null): object
     {       
-        $options = new QROptions($config ?? [
-            'version'    => 5,
-            'outputType' => QRCode::OUTPUT_MARKUP_SVG,
-            'eccLevel'   => QRCode::ECC_L,
-        ]);
-     
+        if (\is_object($config) == false) {
+            $options = new QROptions($config ?? [
+                'version'    => 5,
+                'outputType' => QRCode::OUTPUT_MARKUP_SVG,
+                'eccLevel'   => QRCode::ECC_L,
+            ]);
+        } else {
+            $options = $config;
+        }
+       
         return new QRCode($options);
     } 
 

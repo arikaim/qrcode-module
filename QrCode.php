@@ -35,7 +35,7 @@ class QrCode extends Module
      * Qrcode output hanlders
      */
     const OUTPUT_HANDLERS = [
-        'image' => \Arikaim\Modules\Qrcode\Classes\QrCodeImage::class,
+        'image' => Self::DEFAULT_OUTPUT_HANDLER,
         'svg'   => \Arikaim\Modules\Qrcode\Classes\QrCodeSvg::class,
     ];
 
@@ -50,6 +50,17 @@ class QrCode extends Module
     }
 
     /**
+     * Gte output hanlder class
+     *
+     * @param string|null $name
+     * @return string
+     */
+    public static function getOutputHandlerClass(?string $name): string
+    {
+        return Self::OUTPUT_HANDLERS[$name ?? 'image'] ?? Self::DEFAULT_OUTPUT_HANDLER;
+    }
+
+    /**
      * Create qrcode hanlder
      *
      * @param string|null $name
@@ -59,7 +70,7 @@ class QrCode extends Module
      */
     public static function createOutputHandler(?string $name, $options, $matrix): object
     {
-        $class = Self::OUTPUT_HANDLERS[$name ?? 'image'] ?? Self::DEFAULT_OUTPUT_HANDLER;
+        $class = Self::getOutputHandlerClass($name);
 
         return new $class($options,$matrix);
     }
