@@ -9,6 +9,8 @@
 */
 namespace Arikaim\Modules\Qrcode;
 
+use chillerlan\QRCode\Data\QRMatrix;
+
 use Arikaim\Modules\Image\Classes\Color;
 
 /**
@@ -28,40 +30,40 @@ class QrCodeModules
 
     const MODULES = [
         Self::FINDER => [
-            'dark'  => 1536,
-            'light' => 6
+            'dark'  => QRMatrix::M_FINDER_DARK,
+            'light' => QRMatrix::M_FINDER
         ],
         Self::ALIGNMENT => [
-            'dark'  => 2560,
-            'light' => 10
+            'dark'  => QRMatrix::M_ALIGNMENT_DARK,
+            'light' => QRMatrix::M_ALIGNMENT
         ],
         Self::TIMING => [
-            'dark'  => 3072,
-            'light' => 12
+            'dark'  => QRMatrix::M_TIMING_DARK,
+            'light' => QRMatrix::M_TIMING
         ],
         Self::FORMAT => [
-            'dark'  => 3584,
-            'light' => 14
+            'dark'  => QRMatrix::M_FORMAT_DARK,
+            'light' => QRMatrix::M_FORMAT
         ],
         Self::VERSION => [
-            'dark'  => 4096,
-            'light' => 16
+            'dark'  => QRMatrix::M_VERSION_DARK,
+            'light' => QRMatrix::M_VERSION
         ],
         Self::DATA => [
-            'dark'  => 1024,
-            'light' => 4
+            'dark'  => QRMatrix::M_DATA_DARK,
+            'light' => QRMatrix::M_DATA
         ],
         Self::DARKMODULE => [
-            'dark'  => 512,
-            'light' => 8
+            'dark'  => QRMatrix::M_DARKMODULE,
+            'light' => QRMatrix::M_DARKMODULE_LIGHT
         ],
         Self::SEPARATOR => [
-            'dark'  => null,
-            'light' => 8
+            'dark'  => QRMatrix::M_SEPARATOR_DARK,
+            'light' => QRMatrix::M_SEPARATOR
         ],
         Self::QUIETZONE => [
-            'dark'  => null,
-            'light' => 18
+            'dark'  => QRMatrix::M_QUIETZONE_DARK,
+            'light' => QRMatrix::M_QUIETZONE
         ]
     ];
 

@@ -96,16 +96,16 @@ class ImageOptions extends QROptions
             $this->outputInterface = QrCodeMudule::getOutputHandlerClass($options['handler'] ?? null);
             $this->eccLevel = $options['eccLevel'] ?? QRCode::ECC_H;
             $this->version = $options['version'] ?? 7;  
-            $this->quality = $options['quality'] ?? 90;                         
+            $this->quality = $options['quality'] ?? 100;                         
             $this->imageBase64 = $options['imageBase64'] ?? true;
             $this->logoSpaceWidth   = $options['space_width'] ?? 10;
             $this->logoSpaceHeight  = $options['space_height'] ?? 10;
             $this->scale            = $options['scale'] ?? 10;
             $this->imageTransparent = $options['transparent'] ?? false;
-            $this->bgColor = $options['bgColor'] ?? null;
+            $this->bgColor = $options['bgColor'] ?? [255, 255, 255];
             $this->logoFileName = $options['logoFileName'] ?? null;
             $this->frame = $options['frame'] ?? null;
-            $this->drawCircularModules = $options['drawCircularModules'] ?? true;
+            $this->drawCircularModules = $options['drawCircularModules'] ?? false;
             $this->drawLightModules = $options['drawLightModules'] ?? true;    
             $this->keepAsSquare = $options['keepAsSquare'] ?? [
                 QRMatrix::M_FINDER_DARK,
@@ -113,7 +113,7 @@ class ImageOptions extends QROptions
                 QRMatrix::M_ALIGNMENT_DARK,
             ];
             $this->fontPath = $options['fontPath'] ?? null;
-            $this->circleRadius = $options['circleRadius'] ?? 0.4;
+            $this->circleRadius = $options['circleRadius'] ?? 0.5;
         }
 
         parent::__construct($options);
