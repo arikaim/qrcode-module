@@ -9,6 +9,7 @@
 */
 namespace Arikaim\Modules\Qrcode;
 
+use chillerlan\QRCode\Common\EccLevel;
 use Arikaim\Core\Extension\Module;
 
 /**
@@ -20,10 +21,10 @@ class QrCode extends Module
      *  EEC index map 
      */
     const ECC_INDEX = [
-        'L' => 0,
-        'M' => 1,
-        'Q' => 2,
-        'H' => 3
+        'L' => EccLevel::L,
+        'M' => EccLevel::M,
+        'Q' => EccLevel::Q,
+        'H' => EccLevel::H
     ];
 
     /**
