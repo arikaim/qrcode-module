@@ -13,6 +13,7 @@ use chillerlan\QRCode\QROptions;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\Data\QRMatrix;
 use chillerlan\QRCode\Output\QROutputInterface;
+use chillerlan\QRCode\Common\EccLevel;
 
 use Arikaim\Modules\Qrcode\QrCode as QrCodeMudule;
 
@@ -118,8 +119,12 @@ class ImageOptions extends QROptions
             $this->background = $options['background'] ?? null;
             if (empty($this->background) == false) {
                 $this->outputInterface = \Arikaim\Modules\Qrcode\Classes\QrCodeBackgroundImage::class;
-                $this->imagickFormat = 'png';     
-                $options['imageType'] = 'png';
+                $this->imagickFormat = 'png'; 
+                $this->invertMatrix = false;    
+                $options['eccLevel'] = EccLevel::H;
+                $options['imageType'] = 'png';                
+                $options['version'] = 5;
+                $this->quietzoneSize = 1;
             } else {
                 $this->outputInterface = QrCodeMudule::getOutputHandlerClass($options['handler'] ?? null);
             }

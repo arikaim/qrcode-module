@@ -8,12 +8,10 @@ use Imagick, ImagickPixel;
 
 class QrCodeBackgroundImage extends QRImagick
 {
-
 	protected function getDefaultModuleValue(bool $isDark): ImagickPixel
     {
-		return $this->prepareModuleValue(($isDark) ? '#00000040' : '#ffffffa0');
+		return $this->prepareModuleValue(($isDark) ? '#374151' : '#ffffffa0');
 	}
-
 
 	protected function createImage(): Imagick
     {
