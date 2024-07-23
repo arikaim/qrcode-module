@@ -126,6 +126,7 @@ class ImageOptions extends QROptions
                 $options['version'] = 5;
                 $this->quietzoneSize = 1;
             } else {
+                $this->quietzoneSize = $options['quietzoneSize'] ?? 4;
                 $this->outputInterface = QrCodeMudule::getOutputHandlerClass($options['handler'] ?? null);
             }
             $this->imageType = $options['imageType'] ?? 'png';
